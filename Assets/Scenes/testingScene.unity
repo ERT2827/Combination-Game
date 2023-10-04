@@ -358,6 +358,7 @@ GameObject:
   - component: {fileID: 351504329}
   - component: {fileID: 351504328}
   - component: {fileID: 351504332}
+  - component: {fileID: 351504333}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -504,11 +505,31 @@ MonoBehaviour:
   wallLayer:
     serializedVersion: 2
     m_Bits: 256
+  stopLayers:
+    serializedVersion: 2
+    m_Bits: 448
   castDistance: 0.5
   runningWall: {fileID: 0}
-  sideBoxSize: {x: 0.5, y: 1}
+  currentState: 0
+  moving: 1
+  sideBoxSize: {x: 2.5, y: 1}
+  stopBoxSize: {x: 0.6, y: 0.2}
   sideCastDistance: 0.75
   wallKickDir: 0
+--- !u!114 &351504333
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 351504327}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f4ea018ac233da47a1e87f16cf55b82, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  reticlePref: {fileID: 3211337777132443092, guid: b512c3452cc9b6b47afcc780770ed2c3, type: 3}
+  hitPref: {fileID: 0}
 --- !u!1 &569550231
 GameObject:
   m_ObjectHideFlags: 0
@@ -606,7 +627,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e39a75699bdfff4ca267928bfbc8f27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  camOffSet: {x: 0, y: 0, z: -10}
+  camOffSet: {x: 5, y: 2, z: -10}
   player: {fileID: 351504327}
 --- !u!1 &909971893
 GameObject:

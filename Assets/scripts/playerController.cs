@@ -19,22 +19,27 @@ public class playerController : MonoBehaviour
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private LayerMask ceilingLayer;
     [SerializeField] private LayerMask wallLayer;
+    [SerializeField] private LayerMask stopLayers;
+
 
     [SerializeField] private float castDistance;
 
     public GameObject runningWall = null;
 
-    [Header("booleans")]
+    [Header("logic drivers")]
+    public playerCurrentState currentState;
+
+    public bool moving = true;
     bool isGrounded = true;
     bool doubleJumped = false;
     bool isSliding = false;
     bool boostedSlide = false;
     bool firstSlide = true;
-    bool wallRunning = false;
-
 
     [Header("side checks")]
     [SerializeField] private Vector2 sideBoxSize = new Vector2(1f, 1f);
+    [SerializeField] private Vector2 stopBoxSize = new Vector2(1f, 1f);
+
     [SerializeField] private float sideCastDistance;
     [SerializeField] public int wallKickDir = 0;
 
@@ -53,12 +58,9 @@ public class playerController : MonoBehaviour
     // Update is called once per frame
     
     void FixedUpdate(){
-        if(wallKickDir != 0){
-            speedStore = speedX;
+        if (!moving){
             speedX = 0;
-        }else if(speedStore != 0){
-            speedX = speedStore;
-        }else if(speedX < 10 && wallKickDir == 0){
+        }else if(speedX < 10 && moving){
             speedX += 0.05f;
         }else if (speedX > 50){
             speedX = 50;
@@ -72,10 +74,9 @@ public class playerController : MonoBehaviour
         
         rb.velocity = new Vector2(speedX, rb.velocity.y);
 
-        if (Input.GetButtonDown("Jump") && wallRunning)
+        if (Input.GetButtonDown("Jump") && currentState == playerCurrentState.wallrun)
         {
             jump();
-            wallRunning = false;
         }else if (Input.GetButtonDown("Jump") && isGrounded){
             jump();
             Debug.Log(isGrounded);
@@ -84,7 +85,7 @@ public class playerController : MonoBehaviour
         }
 
 
-        if (Input.GetAxisRaw("Vertical") == -1 && !isSliding)
+        if (Input.GetAxisRaw("Vertical") == -1 && currentState == playerCurrentState.run)
         {
             StartCoroutine(slide());
         }
@@ -108,9 +109,9 @@ public class playerController : MonoBehaviour
 
 
     void jump(){
-        if(!isSliding){
+        if(currentState != playerCurrentState.slide){
             speedX -= 3;
-        }else if(isSliding){
+        }else if(currentState == playerCurrentState.slide){
             speedX += 3;
         }
 
@@ -131,14 +132,20 @@ public class playerController : MonoBehaviour
     }
 
     void groundCheck(){
-        if(Physics2D.BoxCast(transform.position, boxSize, 0, -transform.up, castDistance, groundLayer)){
+        if (Physics2D.BoxCast(transform.position, boxSize, 0, -transform.up, castDistance, groundLayer) && currentState == playerCurrentState.slide)
+        {
             isGrounded = true;
+            doubleJumped = false;
+        }
+        else if(Physics2D.BoxCast(transform.position, boxSize, 0, -transform.up, castDistance, groundLayer)){
+            isGrounded = true;
+            currentState = playerCurrentState.run;
             doubleJumped = false;
         }else{
             isGrounded = false;
         }
 
-        if (runningWall == null || !wallRunning)
+        if (runningWall == null || currentState == playerCurrentState.wallrun)
         {
             rb.gravityScale = 1;
         }
@@ -155,10 +162,15 @@ public class playerController : MonoBehaviour
 
         Gizmos.color = Color.blue;
         Gizmos.DrawWireCube(transform.position-transform.right*sideCastDistance, sideBoxSize);
+
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireCube(transform.position+transform.right*sideCastDistance, stopBoxSize);
+
+
     }
 
     void wallRun(){
-        wallRunning = true;
+        currentState = playerCurrentState.wallrun;
 
         speedX += 2;
 
@@ -169,8 +181,15 @@ public class playerController : MonoBehaviour
             rb.velocity = new Vector2(speedX, 0);
         }
     }
-
+    
     void wallCheck(){
+        if(Physics2D.BoxCast(transform.position, stopBoxSize, 0, transform.right, sideCastDistance, stopLayers) && currentState != playerCurrentState.slide){
+            moving = false;
+        }else{
+            moving = true;
+        }
+        
+        
         if(Physics2D.BoxCast(transform.position, sideBoxSize, 0, transform.right, sideCastDistance, wallLayer) && Physics2D.BoxCast(transform.position, sideBoxSize, 0, -transform.right, sideCastDistance, wallLayer)){
             wallKickDir = 3;
         }else if(Physics2D.BoxCast(transform.position, sideBoxSize, 0, transform.right, sideCastDistance, wallLayer)){
@@ -187,7 +206,8 @@ public class playerController : MonoBehaviour
         if(direction){
             rb.velocity = new Vector2(-10, 10);
         }else{
-            rb.velocity = new Vector2(10, 10);
+            rb.velocity = new Vector2(15, 10);
+            speedX = speedStore + 15;
         }
     }
 
@@ -202,7 +222,7 @@ public class playerController : MonoBehaviour
     }
 
     IEnumerator slide(){
-        isSliding = true;
+        currentState = playerCurrentState.slide;
 
         if(firstSlide){
             transform.localScale = new Vector2(transform.localScale.x, 0.5f);
@@ -224,7 +244,7 @@ public class playerController : MonoBehaviour
         if(endCheck){
             StartCoroutine(slide());
         }else{
-            isSliding = false;
+            currentState = playerCurrentState.run;
             transform.localScale = new Vector2(transform.localScale.x, 1f);
             firstSlide = true; 
         }

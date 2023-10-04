@@ -5,6 +5,10 @@ using UnityEngine.UI;
 
 public class shootingScript : MonoBehaviour
 {
+    [SerializeField] private GameObject reticlePref;
+    [SerializeField] private GameObject hitPref;
+
+    
     SpriteRenderer sRnd;
 
     private void Awake() {
@@ -16,19 +20,8 @@ public class shootingScript : MonoBehaviour
         {
             var mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             mouseWorldPos.z = -5f; // zero z
-            transform.position = mouseWorldPos;
-            StartCoroutine(colSet());
+            Instantiate(reticlePref, mouseWorldPos, Quaternion.identity);
         }
-    }
-
-
-    IEnumerator colSet(){
-        sRnd.color = new Color(1, 1, 1, 1);
-
-        yield return new WaitForSeconds(1);
-
-        sRnd.color = new Color(1, 1, 1, 0);
-
     }
 
 }

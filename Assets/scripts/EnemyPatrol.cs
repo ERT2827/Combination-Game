@@ -12,11 +12,15 @@ public class EnemyPatrol : MonoBehaviour
     public float speed;
     public SpriteRenderer sprite;
 
+    shootingScript shootS;
+
+
     [SerializeField] float health, maxHealth = 3f;
 
     // Start is called before the first frame update
     void Start()
     {
+        shootS = GameObject.Find("Player").GetComponent<shootingScript>();
         //Assigning of variables to references.
         rb = GetComponent<Rigidbody2D>();
         //initial start point.
@@ -83,10 +87,11 @@ public class EnemyPatrol : MonoBehaviour
 
     void OnMouseDown()
     {
-        TakeDamage(1);
-        StartCoroutine(FlashRed());
-
-        
+        if (!shootS.onCoolDown)
+        {
+            TakeDamage(1);
+            StartCoroutine(FlashRed());
+        }
     }
 
 

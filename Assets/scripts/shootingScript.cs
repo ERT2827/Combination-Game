@@ -8,6 +8,10 @@ public class shootingScript : MonoBehaviour
     [SerializeField] private GameObject reticlePref;
     [SerializeField] private GameObject hitPref;
 
+    public bool onCoolDown;
+
+    [SerializeField] private float coolDownTime;
+
     
     SpriteRenderer sRnd;
 
@@ -16,12 +20,22 @@ public class shootingScript : MonoBehaviour
     }
     
     private void FixedUpdate() {
-        if (Input.GetMouseButton(0))
+        if (Input.GetMouseButton(0) && !onCoolDown)
         {
             var mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             mouseWorldPos.z = -5f; // zero z
             Instantiate(reticlePref, mouseWorldPos, Quaternion.identity);
+
+            StartCoroutine(coolDown());
         }
+    }
+
+    IEnumerator coolDown(){
+        onCoolDown = true; 
+
+        yield return new WaitForSeconds(coolDownTime);
+
+        onCoolDown = false;
     }
 
 }

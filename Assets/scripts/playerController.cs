@@ -32,7 +32,6 @@ public class playerController : MonoBehaviour
     public bool moving = true;
     bool isGrounded = true;
     bool doubleJumped = false;
-    bool isSliding = false;
     bool boostedSlide = false;
     bool firstSlide = true;
 
@@ -41,6 +40,9 @@ public class playerController : MonoBehaviour
     [SerializeField] private Vector2 stopBoxSize = new Vector2(1f, 1f);
 
     [SerializeField] private float sideCastDistance;
+    [SerializeField] private float stopCastDistance;
+
+
     [SerializeField] public int wallKickDir = 0;
 
 
@@ -164,7 +166,7 @@ public class playerController : MonoBehaviour
         Gizmos.DrawWireCube(transform.position-transform.right*sideCastDistance, sideBoxSize);
 
         Gizmos.color = Color.green;
-        Gizmos.DrawWireCube(transform.position+transform.right*sideCastDistance, stopBoxSize);
+        Gizmos.DrawWireCube(transform.position+transform.right*stopCastDistance, stopBoxSize);
 
 
     }
@@ -183,7 +185,7 @@ public class playerController : MonoBehaviour
     }
     
     void wallCheck(){
-        if(Physics2D.BoxCast(transform.position, stopBoxSize, 0, transform.right, sideCastDistance, stopLayers) && currentState != playerCurrentState.slide){
+        if(Physics2D.BoxCast(transform.position, stopBoxSize, 0, transform.right, stopCastDistance, stopLayers) && currentState != playerCurrentState.slide){
             moving = false;
         }else{
             moving = true;
@@ -212,7 +214,7 @@ public class playerController : MonoBehaviour
     }
 
     IEnumerator resistence(){
-        if(isGrounded && !isSliding && speedX > 10){
+        if(currentState == playerCurrentState.run && speedX > 10){
             speedX -= 1;
         }
 
@@ -231,10 +233,10 @@ public class playerController : MonoBehaviour
         }
         
 
-        if (!boostedSlide && speedX > 8){
-            speedX -= 0.7f;
-        }else if(!boostedSlide && speedX <= 8){
-            speedX = 8;
+        if (!boostedSlide && speedX > 10){
+            speedX += 1f;
+        }else if(!boostedSlide && speedX <= 10){
+            speedX = 10;
         }
 
         yield return new WaitForSeconds(1f);

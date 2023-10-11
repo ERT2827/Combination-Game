@@ -11,6 +11,8 @@ public class playerController : MonoBehaviour
     [SerializeField] private float speedX;
     [SerializeField] private float speedY;
     [SerializeField] private float speedStore;
+    public int health;
+
 
     [Header("callable items")]
     private Rigidbody2D rb;
@@ -211,6 +213,11 @@ public class playerController : MonoBehaviour
             rb.velocity = new Vector2(15, 10);
             speedX = speedStore + 15;
         }
+    }
+
+    public void Ptakedamage(){
+        health -= 1;
+        Debug.Log(health);
     }
 
     IEnumerator resistence(){

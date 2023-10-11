@@ -5,8 +5,7 @@ using UnityEngine.UI;
 
 public class shootingScript : MonoBehaviour
 {
-    [SerializeField] private GameObject reticlePref;
-    [SerializeField] private GameObject hitPref;
+    [SerializeField] private GameObject[] reticles;
 
     public bool onCoolDown;
 
@@ -18,17 +17,25 @@ public class shootingScript : MonoBehaviour
     private void Awake() {
         sRnd = gameObject.GetComponent<SpriteRenderer>();
     }
-    
-    private void FixedUpdate() {
-        if (Input.GetMouseButton(0) && !onCoolDown)
-        {
+
+    private void Update() {
+        if (Input.GetMouseButtonDown (0) && !onCoolDown) {    
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction);
+            
             var mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             mouseWorldPos.z = -5f; // zero z
-            Instantiate(reticlePref, mouseWorldPos, Quaternion.identity);
+
+            if (hit.collider.tag == "enemy") {
+                Instantiate(reticles[1], mouseWorldPos, Quaternion.identity);
+            }else{
+                Instantiate(reticles[0], mouseWorldPos, Quaternion.identity);
+            }
 
             StartCoroutine(coolDown());
-        }
+		}
     }
+
 
     IEnumerator coolDown(){
         onCoolDown = true; 

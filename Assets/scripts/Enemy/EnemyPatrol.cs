@@ -68,12 +68,15 @@ public class EnemyPatrol : MonoBehaviour
         transform.localScale = localScale;
     }
     //Visualization tool used to make pointA, pointB ,and partol pathway visble for testing.
-    private void OnDrawGizmos()
-    {
-        Gizmos.DrawWireSphere(pointA.transform.position, 1f);
-        Gizmos.DrawWireSphere(pointB.transform.position, 1f);
-        Gizmos.DrawLine(pointA.transform.position, pointB.transform.position);
-    }
+    // private void OnDrawGizmos()
+    // {
+    //     if(pointA != null){
+    //         Gizmos.DrawWireSphere(pointA.transform.position, 1f);
+    //         Gizmos.DrawWireSphere(pointB.transform.position, 1f);
+    //         Gizmos.DrawLine(pointA.transform.position, pointB.transform.position);
+    //     }
+        
+    // }
     // Does damage to enemies upon click 
     public void TakeDamage(float damageAmount)
     {

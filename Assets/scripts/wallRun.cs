@@ -17,22 +17,18 @@ public class wallRun : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other) {
         playa = other.GetComponent<playerController>();
 
-        spriteRenderer.color = Color.yellow;
-
         if(playa != null){
+            spriteRenderer.color = Color.yellow;
             playa.runningWall = parant;
         }
     }
 
 
     private void OnTriggerExit2D(Collider2D other) {
-        playa = other.GetComponent<playerController>();
-
-        spriteRenderer.color = Color.grey;
-
 
         if (playa != null){}
         {
+            spriteRenderer.color = Color.grey;
             playa.runningWall = null;
         }
     }

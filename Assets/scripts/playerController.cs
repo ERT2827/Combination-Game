@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+using TMPro;
 
 
 public enum playerCurrentState{run, slide, jump, wallrun, wallkick}
@@ -8,9 +11,11 @@ public enum playerCurrentState{run, slide, jump, wallrun, wallkick}
 public class playerController : MonoBehaviour
 {
     [Header("Player Values")]
-    [SerializeField] private float speedX;
+    public float speedX;
     [SerializeField] private float speedY;
     [SerializeField] private float speedStore;
+    public int health;
+
 
     [Header("callable items")]
     private Rigidbody2D rb;
@@ -25,6 +30,8 @@ public class playerController : MonoBehaviour
     [SerializeField] private float castDistance;
 
     public GameObject runningWall = null;
+
+    [SerializeField] TMP_Text speedometer;
 
     [Header("logic drivers")]
     public playerCurrentState currentState;
@@ -64,13 +71,20 @@ public class playerController : MonoBehaviour
             speedX = 0;
         }else if(speedX < 10 && moving){
             speedX += 0.05f;
-        }else if (speedX > 50){
-            speedX = 50;
+        }else if (speedX > 30){
+            speedX = 30;
         }
     }
     
     void Update()
     {
+        if(Input.GetKeyDown(KeyCode.R)){
+            Die();
+        }
+
+        speedometer.text = "Speed: " + Mathf.Round((speedX * 3.6f)).ToString() + "KM/H";
+        
+        
         groundCheck();
         wallCheck();
         
@@ -211,6 +225,15 @@ public class playerController : MonoBehaviour
             rb.velocity = new Vector2(15, 10);
             speedX = speedStore + 15;
         }
+    }
+
+    public void Ptakedamage(){
+        health -= 1;
+        Debug.Log(health);
+    }
+
+    public void Die(){
+        SceneManager.LoadScene("testingScene", LoadSceneMode.Single);
     }
 
     IEnumerator resistence(){

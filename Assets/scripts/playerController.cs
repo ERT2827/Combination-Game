@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+using TMPro;
 
 
 public enum playerCurrentState{run, slide, jump, wallrun, wallkick}
@@ -8,9 +11,11 @@ public enum playerCurrentState{run, slide, jump, wallrun, wallkick}
 public class playerController : MonoBehaviour
 {
     [Header("Player Values")]
-    [SerializeField] private float speedX;
+    public float speedX;
     [SerializeField] private float speedY;
     [SerializeField] private float speedStore;
+    public int health;
+
 
     [Header("callable items")]
     private Rigidbody2D rb;
@@ -26,6 +31,10 @@ public class playerController : MonoBehaviour
 
     public GameObject runningWall = null;
 
+    [SerializeField] TMP_Text speedometer;
+
+    private shootingScript shooter;
+
     [Header("logic drivers")]
     public playerCurrentState currentState;
 
@@ -34,6 +43,7 @@ public class playerController : MonoBehaviour
     bool doubleJumped = false;
     bool boostedSlide = false;
     bool firstSlide = true;
+    public bool boostedDismount = false;
 
     [Header("side checks")]
     [SerializeField] private Vector2 sideBoxSize = new Vector2(1f, 1f);
@@ -46,7 +56,9 @@ public class playerController : MonoBehaviour
     [SerializeField] public int wallKickDir = 0;
 
 
-
+    [Header("Touch Stuff")]
+    Vector3 startTouchPos;
+    Vector3 endTouchPos;
 
     
     // Start is called before the first frame update
@@ -55,6 +67,8 @@ public class playerController : MonoBehaviour
         StartCoroutine(resistence());
 
         rb = gameObject.GetComponent<Rigidbody2D>();
+
+        shooter = gameObject.GetComponent<shootingScript>();
     }
 
     // Update is called once per frame
@@ -64,17 +78,70 @@ public class playerController : MonoBehaviour
             speedX = 0;
         }else if(speedX < 10 && moving){
             speedX += 0.05f;
-        }else if (speedX > 50){
-            speedX = 50;
+        }else if (speedX > 30){
+            speedX = 30;
         }
     }
     
     void Update()
     {
+        if(Input.GetKeyDown(KeyCode.R)){
+            Die();
+        }
+
+        speedometer.text = "Speed: " + Mathf.Round((speedX * 3.6f)).ToString() + "KM/H";
+        
+        
         groundCheck();
         wallCheck();
         
         rb.velocity = new Vector2(speedX, rb.velocity.y);
+
+        #if UNITY_ANDROID
+
+            if (Input.touchCount >0 && Input.GetTouch(0).phase == TouchPhase.Began){
+                startTouchPos = Input.GetTouch(0).position;
+            }
+
+            if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Ended)
+            {
+                endTouchPos = Input.GetTouch(0).position;
+
+                if (Mathf.Abs(endTouchPos.y - startTouchPos.y) < 20 && Mathf.Abs(endTouchPos.x - startTouchPos.x) < 20)
+                {
+                    shooter.mobileshoot(startTouchPos);
+
+                }else if (Mathf.Abs(endTouchPos.y - startTouchPos.y) > 20){
+                    if (endTouchPos.y > startTouchPos.y){
+                        if (currentState == playerCurrentState.wallrun)
+                        {
+                            jump();
+                        }else if (isGrounded){
+                            jump();
+                            Debug.Log(isGrounded);
+                        }else if(!doubleJumped){
+                            doubleJump();
+                        }
+                    }else if (endTouchPos.y < startTouchPos.y && currentState == playerCurrentState.run)
+                    {
+                        StartCoroutine(slide());
+                    }
+                }else if(Mathf.Abs(endTouchPos.x - startTouchPos.x) < 20){
+                    if(endTouchPos.x > startTouchPos.x && wallKickDir == 3){
+                        wallKick(false);
+                    }else if(endTouchPos.x < startTouchPos.x && wallKickDir == 3){
+                        wallKick(true);
+                    }else if(endTouchPos.x > startTouchPos.x && wallKickDir == 1){
+                        wallKick(true);
+                    }else if(endTouchPos.x < startTouchPos.x && wallKickDir == 2){
+                        wallKick(false);
+                    }
+                }
+            }   
+
+        #endif
+
+        #if UNITY_STANDALONE_WIN
 
         if (Input.GetButtonDown("Jump") && currentState == playerCurrentState.wallrun)
         {
@@ -102,19 +169,23 @@ public class playerController : MonoBehaviour
             wallKick(false);
         }
         
-        if(Input.GetAxisRaw("Horizontal") == 1 && runningWall != null){
+        if(Input.GetAxisRaw("Horizontal") == 1 && runningWall != null && currentState != playerCurrentState.wallrun){
             wallRun();
         }
+
+        #endif
             
     }
     
 
 
     void jump(){
-        if(currentState != playerCurrentState.slide){
-            speedX -= 3;
+        if (boostedDismount){
+            speedX += 20;
+        }else if(currentState != playerCurrentState.slide){
+            speedX -= 1;
         }else if(currentState == playerCurrentState.slide){
-            speedX += 3;
+            speedX += 1;
         }
 
         float JP = 0 - rb.velocity.y;
@@ -124,7 +195,7 @@ public class playerController : MonoBehaviour
 
 
     void doubleJump(){
-        speedX += 5;
+        speedX += 2;
 
         float JP = 0 - rb.velocity.y;
 
@@ -147,7 +218,7 @@ public class playerController : MonoBehaviour
             isGrounded = false;
         }
 
-        if (runningWall == null || currentState == playerCurrentState.wallrun)
+        if (runningWall == null || currentState != playerCurrentState.wallrun)
         {
             rb.gravityScale = 1;
         }
@@ -174,7 +245,7 @@ public class playerController : MonoBehaviour
     void wallRun(){
         currentState = playerCurrentState.wallrun;
 
-        speedX += 2;
+        speedX += 5;
 
         rb.gravityScale = 0;
 
@@ -206,11 +277,20 @@ public class playerController : MonoBehaviour
 
     void wallKick(bool direction){
         if(direction){
-            rb.velocity = new Vector2(-10, 10);
+            rb.velocity = new Vector2(-5, 10);
         }else{
-            rb.velocity = new Vector2(15, 10);
-            speedX = speedStore + 15;
+            rb.velocity = new Vector2(5, 10);
+            speedX = speedStore + 5;
         }
+    }
+
+    public void Ptakedamage(){
+        health -= 1;
+        Debug.Log(health);
+    }
+
+    public void Die(){
+        SceneManager.LoadScene("testingScene", LoadSceneMode.Single);
     }
 
     IEnumerator resistence(){
@@ -218,7 +298,7 @@ public class playerController : MonoBehaviour
             speedX -= 1;
         }
 
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.4f);
 
         StartCoroutine(resistence());
     }
@@ -233,10 +313,10 @@ public class playerController : MonoBehaviour
         }
         
 
-        if (!boostedSlide && speedX > 10){
-            speedX += 1f;
-        }else if(!boostedSlide && speedX <= 10){
+        if(!boostedSlide && speedX <= 10){
             speedX = 10;
+        }else if(boostedSlide){
+            speedX += 10;
         }
 
         yield return new WaitForSeconds(1f);

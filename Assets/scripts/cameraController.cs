@@ -6,9 +6,9 @@ public class cameraController : MonoBehaviour
 {
     
     [Header("Offset and general components")]
-    [SerializeField] private Vector3 camOffSet;
-    [SerializeField] private float offsetMultiplyerX;
-    [SerializeField] private float offsetMultiplyerY;
+    [SerializeField] private Vector3 camOffSet = new Vector3(10, 2, -10);
+    [SerializeField] private float offsetMultiplyerX = 0.1f;
+    // [SerializeField] private float offsetMultiplyerY = 0.1f;
 
     private Vector3 currentOffSet;
     [SerializeField] private GameObject player;
@@ -16,22 +16,22 @@ public class cameraController : MonoBehaviour
 
     playerController playerC;
 
-    [SerializeField] private Vector2 MaxOffSet;
-    [SerializeField] private Vector2 MinOffSet;
+    [SerializeField] private Vector2 MaxOffSet = new Vector2(25, 10);
+    [SerializeField] private Vector2 MinOffSet = new Vector2(4, 2);
     Vector3 velocity;
-    [SerializeField] private float moveTime;
+    [SerializeField] private float moveTime = 0.3f;
 
     
     [Header("Zoom Level")]
     private float zoomLevel;
-    [SerializeField] private float zoomMultiplyer;
-    [SerializeField] private float minZoom;
-    [SerializeField] private float maxZoom;
+    [SerializeField] private float zoomMultiplyer = 0.5f;
+    [SerializeField] private float minZoom = 6;
+    [SerializeField] private float maxZoom = 10;
     private float speed;
-    [SerializeField] private float zoomTime;
+    [SerializeField] private float zoomTime = 0.25f;
 
 
-    [SerializeField] private Camera cam;
+    private Camera cam;
 
     private void Start() {
         cam = gameObject.GetComponent<Camera>();

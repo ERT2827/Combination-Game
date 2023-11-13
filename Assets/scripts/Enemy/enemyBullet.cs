@@ -17,6 +17,8 @@ public class enemyBullet : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         player = GameObject.FindGameObjectWithTag("Player");
 
+        StartCoroutine(despawnSelf());
+
         if(player != null){
             Vector3 direction = player.transform.position - transform.position;
             rb.velocity =  new Vector2(direction.x, direction.y).normalized * speed;
@@ -28,18 +30,26 @@ public class enemyBullet : MonoBehaviour
     }
 
     private void OnTriggerEnter2D(Collider2D other){
-        playerController player = other.GetComponent<playerController>();
+        playerController playerC = other.GetComponent<playerController>();
         EnemyPatrol enemy = other.GetComponent<EnemyPatrol>();
 
-        if(player != null){
-            player.Ptakedamage();
-        }
+        Debug.Log(other);
 
-        if(other.gameObject.layer != environment){
+        if(playerC != null && playerC.speedX < 11){
+            playerC.Ptakedamage();
+            Destroy(gameObject);
+        }else if(other.gameObject.layer == environment){
             Destroy(gameObject);
         }
 
 
+    }
+
+
+    IEnumerator despawnSelf(){
+        yield return new WaitForSeconds(8f);
+
+        Destroy(gameObject);
     }
 
 }

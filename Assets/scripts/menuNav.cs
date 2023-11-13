@@ -29,4 +29,8 @@ public class menuNav : MonoBehaviour
     public void testLevel(){
         SceneManager.LoadScene("testingScene", LoadSceneMode.Single);
     }
+
+    public void restartLevel(){
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
 }

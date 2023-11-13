@@ -37,15 +37,21 @@ public class playerController : MonoBehaviour
 
     TrailRenderer lightTrail;
 
+    [SerializeField] private Gradient normalGrad;
+    [SerializeField] private Gradient jumpGrad;
+    [SerializeField] private Gradient slideGrad;
+
+    private GameObject redJam;
+
     [Header("logic drivers")]
     public playerCurrentState currentState;
 
     public bool moving = true;
     bool isGrounded = true;
-    bool doubleJumped = false;
-    bool boostedSlide = false;
+    public bool doubleJumped = false;
+    public bool boostedSlide = false;
     bool firstSlide = true;
-    public bool boostedDismount = false;
+    public bool boostedJump = false;
 
     [Header("side checks")]
     [SerializeField] private Vector2 sideBoxSize = new Vector2(1f, 1f);
@@ -75,6 +81,8 @@ public class playerController : MonoBehaviour
         shooter = gameObject.GetComponent<shootingScript>();
 
         lightTrail = gameObject.transform.GetChild(0).gameObject.GetComponent<TrailRenderer>();
+        
+        redJam = GameObject.Find("UI").transform.GetChild(0).gameObject;
     }
 
     // Update is called once per frame
@@ -100,6 +108,8 @@ public class playerController : MonoBehaviour
         
         groundCheck();
         wallCheck();
+        trailCheck();
+        checkHealth();
         
         rb.velocity = new Vector2(speedX, rb.velocity.y);
 
@@ -189,8 +199,9 @@ public class playerController : MonoBehaviour
 
 
     void jump(){
-        if (boostedDismount){
+        if (boostedJump){
             speedX += 10;
+            boostedJump = false;
         }else if(currentState != playerCurrentState.slide){
             speedX -= 1;
         }else if(currentState == playerCurrentState.slide){
@@ -204,7 +215,12 @@ public class playerController : MonoBehaviour
 
 
     void doubleJump(){
-        speedX += 2;
+        if (boostedJump){
+            speedX += 10;
+            boostedJump = false;
+        }else{
+            speedX += 2;
+        }
 
         float JP = 0 - rb.velocity.y;
 
@@ -298,9 +314,33 @@ public class playerController : MonoBehaviour
         Debug.Log(health);
     }
 
+    void checkHealth(){
+        if(health < 1 && health > -1){
+            redJam.SetActive(true);
+            StartCoroutine(regen());
+        }else if(health < 0){
+            Die();
+        }
+    }
+
     public void Die(){
         if(!levelComplete){
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
+    }
+
+    void trailCheck(){
+        if(boostedJump || boostedSlide){
+            if (boostedJump)
+            {
+                lightTrail.colorGradient = jumpGrad;
+            }else
+            {
+                lightTrail.colorGradient = slideGrad;
+            }
+        }else
+        {
+            lightTrail.colorGradient = normalGrad;
         }
     }
 
@@ -318,8 +358,8 @@ public class playerController : MonoBehaviour
         currentState = playerCurrentState.slide;
 
         if(firstSlide){
-            transform.localScale = new Vector2(transform.localScale.x, 0.5f);
-            transform.position = new Vector2(transform.position.x, transform.position.y - 0.5f);
+            transform.localScale = new Vector2(transform.localScale.x, 0.6f);
+            transform.position = new Vector2(transform.position.x, transform.position.y - 0.6f);
             firstSlide = false;
         }
         
@@ -338,10 +378,17 @@ public class playerController : MonoBehaviour
             StartCoroutine(slide());
         }else{
             currentState = playerCurrentState.run;
-            transform.localScale = new Vector2(transform.localScale.x, 1f);
+            transform.localScale = new Vector2(transform.localScale.x, 1.2f);
             firstSlide = true; 
         }
 
+    }
+
+    IEnumerator regen(){
+        yield return new WaitForSeconds(2.2f);
+
+        health = 1;
+        redJam.SetActive(false);
     }
 
 

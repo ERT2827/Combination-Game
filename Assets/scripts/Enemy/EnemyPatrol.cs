@@ -81,6 +81,8 @@ public class EnemyPatrol : MonoBehaviour
 
         if (health <= 0)
         {
+            Timer timer = GameObject.Find("Player").GetComponent<Timer>();
+            timer.currentTime -= 10;
             Destroy(gameObject);
         }
     }

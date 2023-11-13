@@ -8,8 +8,6 @@ public class wallRun : MonoBehaviour
     SpriteRenderer spriteRenderer;
     GameObject parant;
 
-    [SerializeField] private bool booster;
-
     private void Start() {
         parant = gameObject.transform.parent.gameObject;
         spriteRenderer = parant.GetComponent<SpriteRenderer>();
@@ -19,12 +17,9 @@ public class wallRun : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other) {
         playa = other.GetComponent<playerController>();
 
-        if(playa != null && !booster){
+        if(playa != null){
             spriteRenderer.color = Color.yellow;
             playa.runningWall = parant;
-        }else if(playa != null && booster){
-            spriteRenderer.color = Color.blue;
-            playa.boostedDismount = true;
         }
     }
 
@@ -34,9 +29,6 @@ public class wallRun : MonoBehaviour
         if (playa != null){
             spriteRenderer.color = Color.grey;
             playa.runningWall = null;
-        }else if(playa != null && booster){
-            spriteRenderer.color = Color.grey;
-            playa.boostedDismount = false;
         }
     }
 }

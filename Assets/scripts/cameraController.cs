@@ -37,6 +37,8 @@ public class cameraController : MonoBehaviour
         cam = gameObject.GetComponent<Camera>();
         playerC = player.GetComponent<playerController>();
 
+        player = GameObject.Find("Player");
+
         zoomLevel = cam.orthographicSize;
 
     }

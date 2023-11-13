@@ -35,6 +35,8 @@ public class playerController : MonoBehaviour
 
     private shootingScript shooter;
 
+    TrailRenderer lightTrail;
+
     [Header("logic drivers")]
     public playerCurrentState currentState;
 
@@ -47,13 +49,15 @@ public class playerController : MonoBehaviour
 
     [Header("side checks")]
     [SerializeField] private Vector2 sideBoxSize = new Vector2(1f, 1f);
-    [SerializeField] private Vector2 stopBoxSize = new Vector2(1f, 1f);
+    [SerializeField] private Vector2 stopBoxSize = new Vector2(1f, 6f);
 
     [SerializeField] private float sideCastDistance;
     [SerializeField] private float stopCastDistance;
 
 
     [SerializeField] public int wallKickDir = 0;
+
+    public bool levelComplete = false;
 
 
     [Header("Touch Stuff")]
@@ -69,6 +73,8 @@ public class playerController : MonoBehaviour
         rb = gameObject.GetComponent<Rigidbody2D>();
 
         shooter = gameObject.GetComponent<shootingScript>();
+
+        lightTrail = gameObject.transform.GetChild(0).gameObject.GetComponent<TrailRenderer>();
     }
 
     // Update is called once per frame
@@ -111,7 +117,7 @@ public class playerController : MonoBehaviour
                 {
                     shooter.mobileshoot(startTouchPos);
 
-                }else if (Mathf.Abs(endTouchPos.y - startTouchPos.y) > 20){
+                }else if (Mathf.Abs(endTouchPos.y - startTouchPos.y) > Mathf.Abs(endTouchPos.x - startTouchPos.x)){
                     if (endTouchPos.y > startTouchPos.y){
                         if (currentState == playerCurrentState.wallrun)
                         {
@@ -126,8 +132,10 @@ public class playerController : MonoBehaviour
                     {
                         StartCoroutine(slide());
                     }
-                }else if(Mathf.Abs(endTouchPos.x - startTouchPos.x) < 20){
-                    if(endTouchPos.x > startTouchPos.x && wallKickDir == 3){
+                }else{
+                    if(endTouchPos.x > startTouchPos.x && runningWall != null && currentState != playerCurrentState.wallrun){
+                        wallRun();
+                    }else if(endTouchPos.x > startTouchPos.x && wallKickDir == 3){
                         wallKick(false);
                     }else if(endTouchPos.x < startTouchPos.x && wallKickDir == 3){
                         wallKick(true);
@@ -146,6 +154,7 @@ public class playerController : MonoBehaviour
         if (Input.GetButtonDown("Jump") && currentState == playerCurrentState.wallrun)
         {
             jump();
+            currentState = playerCurrentState.jump;
         }else if (Input.GetButtonDown("Jump") && isGrounded){
             jump();
             Debug.Log(isGrounded);
@@ -181,7 +190,7 @@ public class playerController : MonoBehaviour
 
     void jump(){
         if (boostedDismount){
-            speedX += 20;
+            speedX += 10;
         }else if(currentState != playerCurrentState.slide){
             speedX -= 1;
         }else if(currentState == playerCurrentState.slide){
@@ -190,7 +199,7 @@ public class playerController : MonoBehaviour
 
         float JP = 0 - rb.velocity.y;
 
-        rb.velocity = new Vector2(speedX, JP + 5);
+        rb.velocity = new Vector2(speedX, JP + 8);
     }
 
 
@@ -290,7 +299,9 @@ public class playerController : MonoBehaviour
     }
 
     public void Die(){
-        SceneManager.LoadScene("testingScene", LoadSceneMode.Single);
+        if(!levelComplete){
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
     }
 
     IEnumerator resistence(){

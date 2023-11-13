@@ -12,13 +12,21 @@ public class Timer : MonoBehaviour
     [Header("Timer Settings")]
     public float currentTime;
     private TimeSpan timePlayed;
+    public bool running = true;
+
+    private void Start() {
+        timerText = GameObject.Find("Timer").GetComponent<TextMeshProUGUI>();
+    }
 
     // Update is called once per frame
     void Update()
     {
-        currentTime += Time.deltaTime;
-        timePlayed = TimeSpan.FromSeconds(currentTime);
-        string timePlayedStr = timePlayed.ToString("mm':'ss'.'f");
-        timerText.text = timePlayedStr;
+        if(running){
+            currentTime += Time.deltaTime;
+            timePlayed = TimeSpan.FromSeconds(currentTime);
+            string timePlayedStr = timePlayed.ToString("mm':'ss'.'f");
+            timerText.text = timePlayedStr;
+        }
+        
     }
 }

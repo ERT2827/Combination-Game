@@ -375,6 +375,7 @@ public class playerController : MonoBehaviour
         }else{
             currentState = playerCurrentState.run;
             transform.localScale = new Vector2(transform.localScale.x, 1.2f);
+            boostedSlide = false;
             firstSlide = true; 
         }
 

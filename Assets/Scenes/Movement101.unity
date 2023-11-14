@@ -15393,6 +15393,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5097574306172750064, guid: db66705b833768143b3dc9e5410d3ade, type: 3}
+      propertyPath: boostType
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5097574306172750067, guid: db66705b833768143b3dc9e5410d3ade, type: 3}
       propertyPath: m_Name
       value: BoostZone

@@ -11,6 +11,9 @@ public class endScreenScript : MonoBehaviour
     [SerializeField] TMP_Text endTime;
     Timer timer;
     private TimeSpan timePlayed;
+    [SerializeField] private GameObject[] medalPrefs;
+    [SerializeField] private Transform medSpawn;
+    private usableInformation savedData;
 
 
     public void restartLevel(){
@@ -31,5 +34,62 @@ public class endScreenScript : MonoBehaviour
         timePlayed = TimeSpan.FromSeconds(timer.currentTime);
         string timePlayedStr = timePlayed.ToString("mm':'ss'.'f");
         endTime.text = timePlayedStr;
+
+        savedData = GameObject.Find("SaveObject").GetComponent<usableInformation>();
+
+        saveManager(savedData);
+        savedData.saveInfo();
+
+    }
+
+    public void setMedal(int medLevel){
+        
+
+        if (medLevel > 0)
+        {
+            int i = medLevel - 1;
+            Instantiate(medalPrefs[i], medSpawn.position, Quaternion.identity, medSpawn);
+        }
+    }
+
+
+    public void saveManager(usableInformation f){
+        if(SceneManager.GetActiveScene().name == "Movement101"){
+            if(f.bestTime1 > timer.currentTime){
+                f.bestTime1 = timer.currentTime;
+            }
+        }else if(SceneManager.GetActiveScene().name == "wallruns"){
+            if(f.bestTime2 > timer.currentTime){
+                f.bestTime2 = timer.currentTime;
+            }
+        }else if(SceneManager.GetActiveScene().name == "Level1"){
+            if(f.bestTime3 > timer.currentTime){
+                f.bestTime3 = timer.currentTime;
+            }
+        }else if(SceneManager.GetActiveScene().name == "Level2"){
+            if(f.bestTime3 > timer.currentTime){
+                f.bestTime3 = timer.currentTime;
+            }
+        }else if(SceneManager.GetActiveScene().name == "Level3"){
+            if(f.bestTime3 > timer.currentTime){
+                f.bestTime3 = timer.currentTime;
+            }
+        }else if(SceneManager.GetActiveScene().name == "Level4"){
+            if(f.bestTime3 > timer.currentTime){
+                f.bestTime3 = timer.currentTime;
+            }
+        }else if(SceneManager.GetActiveScene().name == "Level5"){
+            if(f.bestTime3 > timer.currentTime){
+                f.bestTime3 = timer.currentTime;
+            }
+        }else if(SceneManager.GetActiveScene().name == "Level6"){
+            if(f.bestTime3 > timer.currentTime){
+                f.bestTime3 = timer.currentTime;
+            }
+        }else if(SceneManager.GetActiveScene().name == "Level7"){
+            if(f.bestTime3 > timer.currentTime){
+                f.bestTime3 = timer.currentTime;
+            }
+        }
     }
 }

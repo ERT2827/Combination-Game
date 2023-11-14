@@ -25,6 +25,11 @@ public class usableInformation : MonoBehaviour
     public float bestTime7 = 100000;
 
 
+    private void Start() {
+        loadInfo();
+    }
+
+
     public void loadInfo(){
     saveFormat data = saveScript.LoadPlayer();
 
@@ -41,13 +46,13 @@ public class usableInformation : MonoBehaviour
     level6Medal = data.level6Medal;
     level7Medal = data.level7Medal;
 
-    bestTime1 = data.level1Medal;
-    bestTime2 = data.level2Medal;
-    bestTime3 = data.level3Medal;
-    bestTime4 = data.level4Medal;
-    bestTime5 = data.level5Medal;
-    bestTime6 = data.level6Medal;
-    bestTime7 = data.level7Medal;    
+    bestTime1 = data.bestTime1;
+    bestTime2 = data.bestTime2;
+    bestTime3 = data.bestTime3;
+    bestTime4 = data.bestTime4;
+    bestTime5 = data.bestTime5;
+    bestTime6 = data.bestTime6;
+    bestTime7 = data.bestTime7;    
     }
 
     public void saveInfo(){

@@ -10,6 +10,8 @@ public class endZone : MonoBehaviour
 
     private void Start() {
         ui = GameObject.Find("UI");
+        // endScreen = GameObject.Find("endScreen");
+        // screenScript = endScreen.transform.GetChild(0).gameObject.GetComponent<endScreenScript>();
     }
     
     private void OnTriggerEnter2D(Collider2D other) {

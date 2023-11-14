@@ -26,8 +26,33 @@ public class menuNav : MonoBehaviour
         SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
     }
 
-    public void testLevel(){
-        SceneManager.LoadScene("testingScene", LoadSceneMode.Single);
+    public void level1(){
+        SceneManager.LoadScene("Movement101", LoadSceneMode.Single);
+    }
+
+    public void level2(){
+        SceneManager.LoadScene("wallruns", LoadSceneMode.Single);
+    }
+
+    public void level3(){
+        SceneManager.LoadScene("Level1", LoadSceneMode.Single);
+    }
+
+    public void level4(){
+        SceneManager.LoadScene("Level2", LoadSceneMode.Single);
+    }
+
+    public void level5(){
+        SceneManager.LoadScene("Level3", LoadSceneMode.Single);
+    }
+
+
+    public void level6(){
+        SceneManager.LoadScene("Level4", LoadSceneMode.Single);
+    }
+
+    public void level7(){
+        SceneManager.LoadScene("Level5", LoadSceneMode.Single);
     }
 
     public void restartLevel(){

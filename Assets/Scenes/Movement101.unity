@@ -15258,6 +15258,10 @@ PrefabInstance:
       propertyPath: endTime
       value: 
       objectReference: {fileID: 542975318}
+    - target: {fileID: 9087576192456019035, guid: 165a37e3122be334aadd8600ca4bd296, type: 3}
+      propertyPath: nextScene
+      value: wallruns
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 165a37e3122be334aadd8600ca4bd296, type: 3}
 --- !u!1001 &2377510440156946389

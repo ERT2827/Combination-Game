@@ -80,6 +80,8 @@ public class usableInformation : MonoBehaviour
         bestTime5 = 100000;
         bestTime6 = 100000;
         bestTime7 = 100000;
+
+        saveInfo();
     }
 }
 

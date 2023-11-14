@@ -46,7 +46,6 @@ public class menuNav : MonoBehaviour
         SceneManager.LoadScene("Level3", LoadSceneMode.Single);
     }
 
-
     public void level6(){
         SceneManager.LoadScene("Level4", LoadSceneMode.Single);
     }

@@ -4296,11 +4296,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6369915695165341859, guid: 3276b5ebed590f649a9afb7a4f22aedd, type: 3}
       propertyPath: parTimes.Array.data[1]
-      value: 60
+      value: 55
       objectReference: {fileID: 0}
     - target: {fileID: 6369915695165341859, guid: 3276b5ebed590f649a9afb7a4f22aedd, type: 3}
       propertyPath: parTimes.Array.data[2]
-      value: 80
+      value: 75
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3276b5ebed590f649a9afb7a4f22aedd, type: 3}

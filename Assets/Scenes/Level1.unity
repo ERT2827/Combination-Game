@@ -3644,15 +3644,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6369915695165341859, guid: 3276b5ebed590f649a9afb7a4f22aedd, type: 3}
       propertyPath: parTimes.Array.data[0]
-      value: 60
+      value: 70
       objectReference: {fileID: 0}
     - target: {fileID: 6369915695165341859, guid: 3276b5ebed590f649a9afb7a4f22aedd, type: 3}
       propertyPath: parTimes.Array.data[1]
-      value: 90
+      value: 80
       objectReference: {fileID: 0}
     - target: {fileID: 6369915695165341859, guid: 3276b5ebed590f649a9afb7a4f22aedd, type: 3}
       propertyPath: parTimes.Array.data[2]
-      value: 120
+      value: 95
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3276b5ebed590f649a9afb7a4f22aedd, type: 3}

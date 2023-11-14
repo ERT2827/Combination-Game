@@ -509,11 +509,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6369915695165341859, guid: 3276b5ebed590f649a9afb7a4f22aedd, type: 3}
       propertyPath: parTimes.Array.data[0]
-      value: 25
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 6369915695165341859, guid: 3276b5ebed590f649a9afb7a4f22aedd, type: 3}
       propertyPath: parTimes.Array.data[1]
-      value: 35
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 6369915695165341859, guid: 3276b5ebed590f649a9afb7a4f22aedd, type: 3}
       propertyPath: parTimes.Array.data[2]

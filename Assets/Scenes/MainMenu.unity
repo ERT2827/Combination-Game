@@ -3454,7 +3454,7 @@ MonoBehaviour:
 
 
     Completing levels
-    unlocks more levels, and completing all levels at a higher rank unlocks new skins.'
+    unlocks more levels.'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -11514,10 +11514,11 @@ MonoBehaviour:
     Wallrunning:
     you can run on special walls that glow by pressing A.
 
+    Shooting: Left click.
+    Killing enemies decreases your time.
 
-    Boosts: Boosts increase
-    the speed of one of your moves. Red boosts make slides faster, Yellow boosts
-    improve jumps.'
+    Boosts: Boosts increase the speed of
+    one of your moves. Red boosts make slides faster, Yellow boosts improve jumps.'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

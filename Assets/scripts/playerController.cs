@@ -208,9 +208,7 @@ public class playerController : MonoBehaviour
             speedX += 1;
         }
 
-        float JP = 0 - rb.velocity.y;
-
-        rb.velocity = new Vector2(speedX, JP + 8);
+        rb.velocity = new Vector2(speedX, 8);
     }
 
 
@@ -222,9 +220,7 @@ public class playerController : MonoBehaviour
             speedX += 2;
         }
 
-        float JP = 0 - rb.velocity.y;
-
-        rb.velocity = new Vector2(speedX, JP + 5);
+        rb.velocity = new Vector2(speedX, 5);
 
         doubleJumped = true;
     }

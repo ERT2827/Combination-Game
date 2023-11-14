@@ -4,10 +4,16 @@ using UnityEngine;
 
 public class medalSetter : MonoBehaviour
 {
+    [Header("Medal Variables")]
     [SerializeField] Transform[] medalHolders;
     [SerializeField] GameObject[] medalPrefabs;
-    [SerializeField] private usableInformation info;
 
+    [Header("Level Variables")]
+    [SerializeField] GameObject[] levelButtons;
+    public List<bool> levelUnlocked = new List<bool>();
+
+    [Header("Other variables")]
+    [SerializeField] private usableInformation info;
     public List<int> medals = new List<int>();
 
     private void Start() {
@@ -27,6 +33,10 @@ public class medalSetter : MonoBehaviour
         }
     }
 
+    void activateLevel(int n, bool unlocked){
+        levelButtons[n].SetActive(unlocked);
+    }
+
     IEnumerator Delayer(){
         yield return new WaitForSeconds(0.1f);
         
@@ -38,11 +48,18 @@ public class medalSetter : MonoBehaviour
         medals.Add(info.level6Medal);
         medals.Add(info.level7Medal);
 
+        foreach (bool b in info.levelUnlock)
+        {
+            levelUnlocked.Add(b);
+        }
 
         for (int i = 0; i < 7; i++)
         {
             spawnMedal(medals[i], medalHolders[i]);
+            activateLevel(i, levelUnlocked[i]);
         }
+
+        levelButtons[0].SetActive(true);
     }
 
 }

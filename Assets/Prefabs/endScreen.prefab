@@ -832,7 +832,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nextScene: testingScene
-  endTime: {fileID: 0}
+  endTime: {fileID: 5682108902941857390}
+  medalPrefs:
+  - {fileID: 8526369886694386396, guid: a30ce2da1b00c7f4abbfe69e5935a29c, type: 3}
+  - {fileID: 8526369886694386396, guid: b15ffe10cf6ed764b9c42a116fb04d6c, type: 3}
+  - {fileID: 8526369886694386396, guid: 1cd437d559451204bbc6a932b6b98b5b, type: 3}
+  medSpawn: {fileID: 3283669206605376458}
 --- !u!114 &8153763557953804105
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -992,7 +997,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3283669206605376458}
   - component: {fileID: 1715598930956240213}
-  - component: {fileID: 8854426382187339020}
   m_Layer: 5
   m_Name: Medal
   m_TagString: Untagged
@@ -1028,36 +1032,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6329105097253488895}
   m_CullTransparentMesh: 1
---- !u!114 &8854426382187339020
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6329105097253488895}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: a4b448f26e57e09408c7ceb9fabbe019, type: 3}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
 --- !u!1 &6453486841057941379
 GameObject:
   m_ObjectHideFlags: 0

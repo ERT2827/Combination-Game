@@ -24,6 +24,9 @@ public class usableInformation : MonoBehaviour
     public float bestTime6 = 100000;
     public float bestTime7 = 100000;
 
+    [Header("skins")]
+    public int currentSkin = 0;
+
 
     private void Start() {
         loadInfo();
@@ -52,7 +55,9 @@ public class usableInformation : MonoBehaviour
     bestTime4 = data.bestTime4;
     bestTime5 = data.bestTime5;
     bestTime6 = data.bestTime6;
-    bestTime7 = data.bestTime7;    
+    bestTime7 = data.bestTime7;
+
+    currentSkin = data.currentSkin;    
     }
 
     public void saveInfo(){
@@ -80,6 +85,8 @@ public class usableInformation : MonoBehaviour
         bestTime5 = 100000;
         bestTime6 = 100000;
         bestTime7 = 100000;
+
+        currentSkin = 0;
 
         saveInfo();
     }

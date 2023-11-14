@@ -23,6 +23,8 @@ public class saveFormat{
     public float bestTime6 = 100000;
     public float bestTime7 = 100000;
     
+    public int currentSkin = 0;
+    
 
 
     public saveFormat(usableInformation info){
@@ -45,6 +47,8 @@ public class saveFormat{
         bestTime5 = info.bestTime5;
         bestTime6 = info.bestTime6;
         bestTime7 = info.bestTime7;
+
+        currentSkin = info.currentSkin;
     }
 
 }

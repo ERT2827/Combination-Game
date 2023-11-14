@@ -8,6 +8,7 @@ public class menuNav : MonoBehaviour
     public GameObject Menu;
     public GameObject Levels;
     public GameObject tutorial;
+    public GameObject skinSelect;
     
     public void quit(){
         Application.Quit();
@@ -17,18 +18,28 @@ public class menuNav : MonoBehaviour
         Menu.SetActive(false);
         Levels.SetActive(true);
         tutorial.SetActive(false);
+        skinSelect.SetActive(false);
     }
 
     public void openTutorial(){
         Menu.SetActive(false);
         Levels.SetActive(false);
         tutorial.SetActive(true);
+        skinSelect.SetActive(false);
+    }
+
+    public void openSkins(){
+        Menu.SetActive(false);
+        Levels.SetActive(false);
+        tutorial.SetActive(false);
+        skinSelect.SetActive(true);
     }
 
     public void back(){
         Menu.SetActive(true);
         Levels.SetActive(false);
         tutorial.SetActive(false);
+        skinSelect.SetActive(false);
     }
 
     public void loadmenu(){

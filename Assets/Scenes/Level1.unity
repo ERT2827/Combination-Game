@@ -421,7 +421,7 @@ GameObject:
   - component: {fileID: 294813371}
   - component: {fileID: 294813370}
   - component: {fileID: 294813372}
-  m_Layer: 8
+  m_Layer: 7
   m_Name: Wall (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -754,7 +754,7 @@ GameObject:
   - component: {fileID: 314544277}
   - component: {fileID: 314544276}
   - component: {fileID: 314544275}
-  m_Layer: 8
+  m_Layer: 7
   m_Name: Wall (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1231,6 +1231,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Menu: {fileID: 0}
   Levels: {fileID: 0}
+  tutorial: {fileID: 0}
+  skinSelect: {fileID: 0}
 --- !u!4 &430506801
 Transform:
   m_ObjectHideFlags: 0
@@ -3629,6 +3631,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1785421628}
     - target: {fileID: 6369915695165341859, guid: 3276b5ebed590f649a9afb7a4f22aedd, type: 3}
+      propertyPath: savedData
+      value: 
+      objectReference: {fileID: 6541056028089416900}
+    - target: {fileID: 6369915695165341859, guid: 3276b5ebed590f649a9afb7a4f22aedd, type: 3}
       propertyPath: screenScript
       value: 
       objectReference: {fileID: 1785421627}
@@ -3832,7 +3838,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8079679640540519026, guid: 20c6405b2bb50ec4c9b6ef29f8fe0283, type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 8079679640540519026, guid: 20c6405b2bb50ec4c9b6ef29f8fe0283, type: 3}
       propertyPath: m_AnchorMax.x
@@ -4400,7 +4406,7 @@ GameObject:
   - component: {fileID: 1683405552}
   - component: {fileID: 1683405554}
   - component: {fileID: 1683405553}
-  m_Layer: 8
+  m_Layer: 7
   m_Name: Wall (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4718,6 +4724,10 @@ PrefabInstance:
       propertyPath: nextScene
       value: Level2
       objectReference: {fileID: 0}
+    - target: {fileID: 9087576192456019035, guid: 165a37e3122be334aadd8600ca4bd296, type: 3}
+      propertyPath: savedData
+      value: 
+      objectReference: {fileID: 6541056028089416900}
     m_RemovedComponents:
     - {fileID: 8854426382187339020, guid: 165a37e3122be334aadd8600ca4bd296, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 165a37e3122be334aadd8600ca4bd296, type: 3}
@@ -5336,3 +5346,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 29322a72b0429e8488add79a8c891f7e, type: 3}
+--- !u!114 &6541056028089416900 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3534701032881245652, guid: 29322a72b0429e8488add79a8c891f7e, type: 3}
+  m_PrefabInstance: {fileID: 6541056028089416899}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc6a137192529b94c9d9a530c7a227a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

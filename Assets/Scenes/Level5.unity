@@ -1132,6 +1132,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Menu: {fileID: 0}
   Levels: {fileID: 0}
+  tutorial: {fileID: 0}
+  skinSelect: {fileID: 0}
 --- !u!4 &430506801
 Transform:
   m_ObjectHideFlags: 0
@@ -4277,9 +4279,29 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1785421628}
     - target: {fileID: 6369915695165341859, guid: 3276b5ebed590f649a9afb7a4f22aedd, type: 3}
+      propertyPath: savedData
+      value: 
+      objectReference: {fileID: 2059671961}
+    - target: {fileID: 6369915695165341859, guid: 3276b5ebed590f649a9afb7a4f22aedd, type: 3}
       propertyPath: screenScript
       value: 
       objectReference: {fileID: 1785421627}
+    - target: {fileID: 6369915695165341859, guid: 3276b5ebed590f649a9afb7a4f22aedd, type: 3}
+      propertyPath: parTimes.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6369915695165341859, guid: 3276b5ebed590f649a9afb7a4f22aedd, type: 3}
+      propertyPath: parTimes.Array.data[0]
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 6369915695165341859, guid: 3276b5ebed590f649a9afb7a4f22aedd, type: 3}
+      propertyPath: parTimes.Array.data[1]
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 6369915695165341859, guid: 3276b5ebed590f649a9afb7a4f22aedd, type: 3}
+      propertyPath: parTimes.Array.data[2]
+      value: 80
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3276b5ebed590f649a9afb7a4f22aedd, type: 3}
 --- !u!1 &1350410929
@@ -5507,8 +5529,12 @@ PrefabInstance:
       objectReference: {fileID: 2016843349}
     - target: {fileID: 9087576192456019035, guid: 165a37e3122be334aadd8600ca4bd296, type: 3}
       propertyPath: nextScene
-      value: Level5
+      value: MainMenu
       objectReference: {fileID: 0}
+    - target: {fileID: 9087576192456019035, guid: 165a37e3122be334aadd8600ca4bd296, type: 3}
+      propertyPath: savedData
+      value: 
+      objectReference: {fileID: 2059671961}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 165a37e3122be334aadd8600ca4bd296, type: 3}
 --- !u!114 &1785421627 stripped
@@ -5538,7 +5564,7 @@ GameObject:
   - component: {fileID: 1830748652}
   - component: {fileID: 1830748654}
   - component: {fileID: 1830748653}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Ground (18)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5860,6 +5886,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 29322a72b0429e8488add79a8c891f7e, type: 3}
+--- !u!114 &2059671961 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3534701032881245652, guid: 29322a72b0429e8488add79a8c891f7e, type: 3}
+  m_PrefabInstance: {fileID: 2059671960}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc6a137192529b94c9d9a530c7a227a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2060531005
 GameObject:
   m_ObjectHideFlags: 0
@@ -5871,7 +5908,7 @@ GameObject:
   - component: {fileID: 2060531006}
   - component: {fileID: 2060531008}
   - component: {fileID: 2060531007}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Ground (9)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6277,7 +6314,7 @@ GameObject:
   - component: {fileID: 2114929321}
   - component: {fileID: 2114929323}
   - component: {fileID: 2114929322}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Ground (29)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

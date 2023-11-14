@@ -12,13 +12,12 @@ public class endZone : MonoBehaviour
     [Header("Par times (in seconds)")]
 
     [SerializeField] private float[] parTimes; //in seconds
-    private usableInformation savedData;
+    [SerializeField] private usableInformation savedData;
 
     private void Start() {
         ui = GameObject.Find("UI");
         // endScreen = GameObject.Find("endScreen");
         // screenScript = endScreen.transform.GetChild(0).gameObject.GetComponent<endScreenScript>();
-        savedData = GameObject.Find("SaveObject").GetComponent<usableInformation>();
     }
     
     private void OnTriggerEnter2D(Collider2D other) {

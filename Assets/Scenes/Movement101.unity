@@ -134,6 +134,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SaveObject
       objectReference: {fileID: 0}
+    - target: {fileID: 1997116436316586539, guid: 29322a72b0429e8488add79a8c891f7e, type: 3}
+      propertyPath: m_TagString
+      value: Saver
+      objectReference: {fileID: 0}
     - target: {fileID: 8451966906944407856, guid: 29322a72b0429e8488add79a8c891f7e, type: 3}
       propertyPath: m_RootOrder
       value: 9
@@ -988,6 +992,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1015363924 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3534701032881245652, guid: 29322a72b0429e8488add79a8c891f7e, type: 3}
+  m_PrefabInstance: {fileID: 502618724}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc6a137192529b94c9d9a530c7a227a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1588868076 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8079679641510898401, guid: 20c6405b2bb50ec4c9b6ef29f8fe0283, type: 3}
@@ -15319,6 +15334,10 @@ PrefabInstance:
       propertyPath: nextScene
       value: wallruns
       objectReference: {fileID: 0}
+    - target: {fileID: 9087576192456019035, guid: 165a37e3122be334aadd8600ca4bd296, type: 3}
+      propertyPath: savedData
+      value: 
+      objectReference: {fileID: 1015363924}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 165a37e3122be334aadd8600ca4bd296, type: 3}
 --- !u!1001 &2377510440156946389
@@ -15506,6 +15525,10 @@ PrefabInstance:
       propertyPath: endScreen
       value: 
       objectReference: {fileID: 704198043}
+    - target: {fileID: 6369915695165341859, guid: 3276b5ebed590f649a9afb7a4f22aedd, type: 3}
+      propertyPath: savedData
+      value: 
+      objectReference: {fileID: 1015363924}
     - target: {fileID: 6369915695165341859, guid: 3276b5ebed590f649a9afb7a4f22aedd, type: 3}
       propertyPath: screenScript
       value: 

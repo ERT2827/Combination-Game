@@ -13,7 +13,7 @@ public class endScreenScript : MonoBehaviour
     private TimeSpan timePlayed;
     [SerializeField] private GameObject[] medalPrefs;
     [SerializeField] private Transform medSpawn;
-    private usableInformation savedData;
+    [SerializeField] private usableInformation savedData;
 
 
     public void restartLevel(){
@@ -29,13 +29,7 @@ public class endScreenScript : MonoBehaviour
         timer = GameObject.Find("Player").GetComponent<Timer>();
 
         
-        timer.running = true;
-
-        timePlayed = TimeSpan.FromSeconds(timer.currentTime);
-        string timePlayedStr = timePlayed.ToString("mm':'ss'.'f");
-        endTime.text = timePlayedStr;
-
-        savedData = GameObject.Find("SaveObject").GetComponent<usableInformation>();
+        timer.running = false;
 
         saveManager(savedData);
         savedData.saveInfo();
@@ -49,46 +43,79 @@ public class endScreenScript : MonoBehaviour
         {
             int i = medLevel - 1;
             Instantiate(medalPrefs[i], medSpawn.position, Quaternion.identity, medSpawn);
+        }else{
+            nextScene = "MainMenu";
         }
     }
 
 
     public void saveManager(usableInformation f){
+
+        timePlayed = TimeSpan.FromSeconds(timer.currentTime);
+        string timePlayedStr = timePlayed.ToString("mm':'ss'.'f");
+
         if(SceneManager.GetActiveScene().name == "Movement101"){
             if(f.bestTime1 > timer.currentTime){
                 f.bestTime1 = timer.currentTime;
+                endTime.text = timePlayedStr + " NEW BEST";
+            }else{
+                endTime.text = timePlayedStr;
             }
         }else if(SceneManager.GetActiveScene().name == "wallruns"){
             if(f.bestTime2 > timer.currentTime){
                 f.bestTime2 = timer.currentTime;
+                endTime.text = timePlayedStr + " NEW BEST";
+            }else{
+                endTime.text = timePlayedStr;
             }
         }else if(SceneManager.GetActiveScene().name == "Level1"){
             if(f.bestTime3 > timer.currentTime){
                 f.bestTime3 = timer.currentTime;
+                endTime.text = timePlayedStr + " NEW BEST";
+            }else{
+                endTime.text = timePlayedStr;
             }
         }else if(SceneManager.GetActiveScene().name == "Level2"){
             if(f.bestTime3 > timer.currentTime){
                 f.bestTime3 = timer.currentTime;
+                endTime.text = timePlayedStr + " NEW BEST";
+            }else{
+                endTime.text = timePlayedStr;
             }
         }else if(SceneManager.GetActiveScene().name == "Level3"){
             if(f.bestTime3 > timer.currentTime){
                 f.bestTime3 = timer.currentTime;
+                endTime.text = timePlayedStr + " NEW BEST";
+            }else{
+                endTime.text = timePlayedStr;
             }
         }else if(SceneManager.GetActiveScene().name == "Level4"){
             if(f.bestTime3 > timer.currentTime){
                 f.bestTime3 = timer.currentTime;
+                endTime.text = timePlayedStr + " NEW BEST";
+            }else{
+                endTime.text = timePlayedStr;
             }
         }else if(SceneManager.GetActiveScene().name == "Level5"){
             if(f.bestTime3 > timer.currentTime){
                 f.bestTime3 = timer.currentTime;
+                endTime.text = timePlayedStr + " NEW BEST";
+            }else{
+                endTime.text = timePlayedStr;
             }
         }else if(SceneManager.GetActiveScene().name == "Level6"){
             if(f.bestTime3 > timer.currentTime){
                 f.bestTime3 = timer.currentTime;
+                endTime.text = timePlayedStr + " NEW BEST";
+            }else{
+                endTime.text = timePlayedStr;
             }
         }else if(SceneManager.GetActiveScene().name == "Level7"){
             if(f.bestTime3 > timer.currentTime){
                 f.bestTime3 = timer.currentTime;
+                endTime.text = timePlayedStr + " NEW BEST";
+            }else{
+                endTime.text = timePlayedStr;
             }
         }
     }

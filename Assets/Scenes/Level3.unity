@@ -2270,8 +2270,8 @@ MonoBehaviour:
   offsetMultiplyerX: 0.1
   offsetMultiplyerY: 0.1
   player: {fileID: 351504327}
-  MaxOffSet: {x: 25, y: 10}
-  MinOffSet: {x: 4, y: 2}
+  MaxOffSet: {x: 15, y: 5}
+  MinOffSet: {x: 5, y: 3}
   moveTime: 0.3
   zoomMultiplyer: 0.5
   minZoom: 6
